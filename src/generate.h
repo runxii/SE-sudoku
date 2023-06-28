@@ -179,12 +179,12 @@ void saveSudokuToFile(const vector<vector<int>>& num, const string& filename, in
 }
 
 // 生成n个独立的数独游戏
-void generateMultipleSudoku(int n) {
+void generateMultipleSudoku(int n, int eraseNum) {
     srand(static_cast<unsigned>(time(NULL)));
     for (int i = 0; i < n; i++) {
         std::vector<std::vector<int>> num(SIZE, std::vector<int>(SIZE, -1));
         generate_core(num, 0, 0);
-        eraseRandomGrids(num, 40); // 假设挖空40个格子
+        eraseRandomGrids(num, eraseNum);
 
         std::string filename = "game.txt";
         saveSudokuToFile(num, filename, i+1);
