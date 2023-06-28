@@ -30,16 +30,16 @@ int loadSudokuNum(const string& filename) {
 }
 
 // 从指定路径的文件中读取数独游戏
-//vector<vector<int>> loadSudokuFromFile(const std::string& filename, int index)
-//{
-//
-//}
-//
-//// 解决共sudokuIndex个数独问题
-//void solveSudokuGames(const string& filename, int sudokuIndex) {
-//    
-//    for (int i = 0; i < sudokuIndex; i++) {
-//        vector<vector<int>> needSolve = loadSudokuFromFile(filename,i);
-//        // TODO
-//    }
-//}
+vector<vector<int>> loadSudokuFromFile(const std::string& filename, int index)
+{
+
+}
+
+// 解决共sudokuIndex个数独问题
+void solveSudokuGames(const string& filename, int sudokuIndex) {
+    
+    for (int i = 0; i < sudokuIndex; i++) {
+        vector<vector<int>> needSolve = loadSudokuFromFile(filename,i);
+        // TODO
+    }
+}

@@ -14,8 +14,14 @@ int main(int argc, char* argv[]) {
         generateMultipleBoard(stoi(argument));
     }
     else if (option == "-n") {
-        
+
         int sudokuCount = std::stoi(argument);
+
+        if (argc < 4) {
+            generateMultipleSudoku(sudokuCount, ERASE);
+            
+        }
+        
         std::string next_option = argv[3];
         std::string next_argument = argv[4];  
 
@@ -52,9 +58,8 @@ int main(int argc, char* argv[]) {
             cout << sudokuCount << " Sudoku game(s) of difficulty level " << difficulty << " generated and saved to game.txt" << std::endl;
         }
         else {
-            generateMultipleSudoku(sudokuCount, ERASE);
-            //std::cout << "Invalid option: " << next_option << std::endl;
-            //return 0;
+            std::cout << "Invalid option: " << option << std::endl;
+            return 0;
         }
     }
     else if (option == "-s") {
