@@ -60,8 +60,10 @@
 
 ``` bash
 │--README.md     
+└--img              // README中的图像文件目录
 └--example
    │--game.txt      // 用于对-s进行测试的数独游戏文件
+   │--incomplete.txt// 用于对-s进行测试的不完整的数独游戏文件
    │--solveSheet.txt// 使用-n生成游戏时对应的终局文件，每次使用-n前都要删除
    │--generate.txt  // 使用-n生成的数独游戏文件，每次使用-n生成游戏前都要删除该文件
    │--sudoku.txt    // 使用-s生成的解决数独得到的答案，每次使用-s前都要删除
@@ -69,6 +71,7 @@
    │--main.cpp      // 入口文件  
    │--generate.h    // 生成数独游戏文件
    │--solver.h      // 解决数独问题文件
+└--test             // 覆盖率测试用例目录
 ```
 
 ### （二）控制台命令
