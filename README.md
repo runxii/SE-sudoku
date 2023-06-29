@@ -71,7 +71,13 @@
    │--solver.h      // 解决数独问题文件
 ```
 
-### （二）使用截图
+### （二）控制台命令
+
+![image-20230629205819841](./img/image-20230629205819841.png)
+
+<img src="./img/image-20230629205735221.png" alt="image-20230629205735221" style="zoom:33%;" />
+
+### （三）使用截图
 
 使用`sudoku -n 20 -u`生成有唯一解的数独游戏；随后使用`sudoku -s "game.txt"`进行求解，可以看到程序能够顺利解开测试用的数独游戏，并且与对应的答案相同。
 
@@ -84,3 +90,17 @@
 如果将`game.txt`中的数独删去一些数据，则可以看到程序反馈：
 
 <img src="./img/image-20230629191629138.png" alt="image-20230629191629138" style="zoom: 33%;" />
+
+## 四、质量测试
+
+``` bash
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\ostream(284): warning C4530: 使用了 C++ 异常处理程序，但未启用展开语义。请指定 /EHsc
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\ostream(269): note: 在编译 类 模板 成员函数“std::basic_ostream<char,std::char_traits<char>> &std::basic_ostream<char,std::char_traits<char>>::operator <<(int)”时
+A:\_Uni\junior\second term\software-engineering\SE-labs\SE-lab5-6.30\sudoku\sudoku\generate.h(31): note: 查看对正在编译的函数模板实例化“std::basic_ostream<char,std::char_traits<char>> &std::basic_ostream<char,std::char_traits<char>>::operator <<(int)”的引用
+A:\_Uni\junior\second term\software-engineering\SE-labs\SE-lab5-6.30\sudoku\sudoku\generate.h(28): note: 查看对正在编译的类模板实例化“std::basic_ostream<char,std::char_traits<char>>”的引用
+A:\_Uni\junior\second term\software-engineering\SE-labs\SE-lab5-6.30\sudoku\sudoku\main.cpp(28) : warning C6246: “eraseCount”的局部声明遮蔽了外部作用域中具有相同名称的声明。有关其他信息，请参见此前位于“19”行(“a:\_uni\junior\second term\software-engineering\se-labs\se-lab5-6.30\sudoku\sudoku\main.cpp”中)的声明。: Lines: 19
+A:\_Uni\junior\second term\software-engineering\SE-labs\SE-lab5-6.30\sudoku\sudoku\main.cpp(39) : warning C6246: “eraseCount”的局部声明遮蔽了外部作用域中具有相同名称的声明。有关其他信息，请参见此前位于“19”行(“a:\_uni\junior\second term\software-engineering\se-labs\se-lab5-6.30\sudoku\sudoku\main.cpp”中)的声明。: Lines: 19
+A:\_Uni\junior\second term\software-engineering\SE-labs\SE-lab5-6.30\sudoku\sudoku\generate.h(123) : warning C4715: “generate_core”: 不是所有的控件路径都返回值
+```
+
+![image-20230629202748351](./img/image-20230629202748351.png)
