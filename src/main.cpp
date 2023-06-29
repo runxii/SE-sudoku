@@ -3,7 +3,7 @@
 
 int main(int argc, char* argv[]) {
     if (argc < 3) {
-        cout << "Usage: sudoku -c <number_of_games> -n <count> -r <min> <max> -n <count> -m <difficulty>" << endl;
+        cout << "使用方法: ./sudoku.exe -c <number_of_games> -n <count> -r <min> <max> -n <count> -m <difficulty>" << endl;
         return 0;
     }
 
@@ -19,7 +19,7 @@ int main(int argc, char* argv[]) {
         int eraseCount = ERASE;
         if (argc < 4) {
             //generateMultipleSudoku(sudokuCount, eraseCount);
-            cout << sudokuCount << " default Sudoku game(s) generated and saved to game.txt" << endl;
+            cout << sudokuCount << "个默认数独游戏已成功生成，并保存到了以下文件中：generate.txt" << endl;
         }
         else {
             string next_option = argv[3];
@@ -77,7 +77,7 @@ int main(int argc, char* argv[]) {
         
     }
     else {
-        cerr << "Invalid option: " << option << endl;
+        cerr << "无效参数: " << option << endl;
     }
     return 0;
 }

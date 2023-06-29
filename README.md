@@ -60,9 +60,11 @@
 
 ``` bash
 │--README.md     
-└--game.txt         // 使用-n生成的数独游戏文件，每次使用-n生成游戏前都要删除该文件
+└--example
+   |--game.txt      // 用于对-s进行测试的数独游戏文件
+   |--generate.txt  // 使用-n生成的数独游戏文件，每次使用-n生成游戏前都要删除该文件
+   |--sudoku.txt    // 使用-s生成的解决数独得到的答案，每次使用-s前都要删除
 └--src              // 源代码目录  
-   │--testPuzzle.h  // 测试用例文件
    │--main.cpp      // 入口文件  
    │--generate.h    // 生成数独游戏文件
    │--solver.h      // 解决数独问题文件

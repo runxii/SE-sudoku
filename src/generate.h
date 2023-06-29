@@ -14,6 +14,7 @@ using namespace std;
 const int SIZE = 9;
 // 没有其他参数时，默认从一个终局中挖空40个格子得到一个独立的数独游戏
 const int ERASE = 40;
+const string generateFilename = "generate.txt";
 
 void print(const vector<vector<int>>& num)
 {
@@ -124,24 +125,24 @@ bool generate_core(vector<vector<int>>& num, int row, int col)
 void generateMultipleBoard(int n) {
     srand(static_cast<unsigned>(time(NULL)));
     for (int i = 0; i < n; i++) {
-        std::vector<std::vector<int>> num(SIZE, std::vector<int>(SIZE, -1));
+        vector<vector<int>> num(SIZE, vector<int>(SIZE, -1));
         generate_core(num, 0, 0);
 
-        std::cout << "Sudoku board " << (i + 1) << ":\n";
+        cout << "Sudoku board " << (i + 1) << ":\n";
         print(num);
-        std::cout << std::endl;
+        cout << endl;
     }
 }
 
-void eraseRandomGrids(std::vector<std::vector<int>>& num, int count) {
-    std::vector<std::pair<int, int>> positions;
+void eraseRandomGrids(vector<vector<int>>& num, int count) {
+    vector<pair<int, int>> positions;
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
             positions.emplace_back(i, j);
         }
     }
 
-    std::random_shuffle(positions.begin(), positions.end());
+    random_shuffle(positions.begin(), positions.end());
 
     for (int i = 0; i < count; i++) {
         int row = positions[i].first;
@@ -154,10 +155,10 @@ void eraseRandomGrids(std::vector<std::vector<int>>& num, int count) {
 // sudokuIndex：生成的第几个游戏
 void saveSudokuToFile(const vector<vector<int>>& num, const string& filename, int sudokuIndex) {
     // 以追加模式打开文件
-    std::ofstream outFile(filename, std::ios::app); 
+    ofstream outFile(filename, ios::app); 
 
     if (outFile.is_open()) {
-        outFile << sudokuIndex << endl;
+        outFile << "--------" << sudokuIndex << "--------" << endl;
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
                 if (num[i][j] == -1) {
@@ -171,10 +172,10 @@ void saveSudokuToFile(const vector<vector<int>>& num, const string& filename, in
         }
 
         outFile.close(); // 关闭输出文件
-        std::cout << "Sudoku game saved to " << filename << std::endl;
+        cout << "第" << sudokuIndex << "个数独成功保存到了以下文件中：" << filename << endl;
     }
     else {
-        std::cerr << "Unable to open file " << filename << std::endl;
+        cerr << "无法打开指定文件" << filename << endl;
     }
 }
 
@@ -182,11 +183,11 @@ void saveSudokuToFile(const vector<vector<int>>& num, const string& filename, in
 void generateMultipleSudoku(int n, int eraseNum) {
     srand(static_cast<unsigned>(time(NULL)));
     for (int i = 0; i < n; i++) {
-        std::vector<std::vector<int>> num(SIZE, std::vector<int>(SIZE, -1));
+        vector<vector<int>> num(SIZE, vector<int>(SIZE, -1));
         generate_core(num, 0, 0);
         eraseRandomGrids(num, eraseNum);
 
-        std::string filename = "game.txt";
+        string filename = generateFilename;
         saveSudokuToFile(num, filename, i+1);
     }
 }
