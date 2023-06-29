@@ -19,7 +19,7 @@ int main(int argc, char* argv[]) {
         int eraseCount = ERASE;
         if (argc < 4) {
             //generateMultipleSudoku(sudokuCount, eraseCount);
-            cout << sudokuCount << "个默认数独游戏已成功生成，并保存到了以下文件中：generate.txt" << endl;
+            cout << sudokuCount << "个默认数独游戏已成功生成，并保存generate.txt中\n对应的终局已保存到solveSheet.txt中" << endl;
         }
         else {
             string next_option = argv[3];
@@ -27,7 +27,7 @@ int main(int argc, char* argv[]) {
                 // 需要去除的数字数量，范围在36到44之间（保证有解且唯一解）
                 int eraseCount = 0;
                 eraseCount = rand() % 45 + 36;
-                //generateMultipleSudoku(sudokuCount, eraseCount);  
+                cout << sudokuCount << "个有唯一解的数独游戏已成功生成，并保存generate.txt中\n对应的终局已保存到solveSheet.txt中" << endl;
             }
             else {
                 string next_argument = argv[4];
@@ -37,14 +37,14 @@ int main(int argc, char* argv[]) {
                     int minErase = stoi(next_argument);
                     int maxErase = stoi(argv[5]);
                     int eraseCount = rand() % (maxErase - minErase + 1) + minErase;
-                    //generateMultipleSudoku(sudokuCount, eraseCount);
+                    cout << sudokuCount << "个指定挖空的数独游戏已成功生成，并保存generate.txt中\n对应的终局已保存到solveSheet.txt中" << endl;
                 }
                 else if (next_option == "-m") {
                     // 按照难度级别生成数独游戏
                     int difficulty = stoi(next_argument);
 
                     if (difficulty < 1 || difficulty > 3) {
-                        cout << "Invalid difficulty level: " << difficulty << endl;
+                        cout << "无效的难度等级参数：" << difficulty << endl;
                         return 0;
                     }
 
@@ -60,10 +60,10 @@ int main(int argc, char* argv[]) {
                         break;
                     }
                     //generateMultipleSudoku(sudokuCount, eraseCount);
-                    cout << sudokuCount << " Sudoku game(s) of difficulty level " << difficulty << " generated and saved to game.txt" << endl;
+                    cout << sudokuCount << "个难度为" << difficulty << "的数独游戏已成功生成，并保存到generate.txt\n对应终局保存到solveSheet.txt中" << endl;
                 }
                 else {
-                    cerr << "Invalid option: " << next_option << endl;
+                    cerr << "无效参数：" << next_option << endl;
                     return 0;
                 }
             }
@@ -74,7 +74,7 @@ int main(int argc, char* argv[]) {
         // 获取文件中数独游戏的个数
         int sudokuNum = loadSudokuNum(argument);
         solveSudokuGames(argument,sudokuNum);
-        
+        cout << "解决已完成，答案保存到sudoku.txt中，请查看。" << endl;
     }
     else {
         cerr << "无效参数: " << option << endl;

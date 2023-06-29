@@ -19,11 +19,12 @@ int loadSudokuNum(const string& filename) {
         }
     }
     else {
-        cerr << "Unable to open file " << filename << endl;
+        cerr << "无法打开指定文件：" << filename << endl;
     }
     // 数独有缺行
     if (lineno % (SIZE + 1) != 0) {
-        cerr << "Sudokus in File are not complete " << endl;
+        cerr << "文件中的数独并不完整，请检查，已退出程序。" << endl;
+        exit(1);
     }
     else {
         sudokuIndex = lineno / 10;
