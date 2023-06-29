@@ -6,6 +6,7 @@
 #include <vector>
 #include <fstream>
 #include <algorithm>
+#include "testPuzzle.h"
 
 using namespace std;
 
@@ -173,6 +174,9 @@ void saveSudokuToFile(const vector<vector<int>>& num, const string& filename, in
 
         outFile.close(); // 关闭输出文件
         //cout << "第" << sudokuIndex << "个数独成功保存到了以下文件中：" << filename << endl;
+    }
+    else {
+        cerr << "无法打开指定文件" << filename << endl;
     }
 }
 

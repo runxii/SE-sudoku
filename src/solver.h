@@ -23,18 +23,27 @@ int loadSudokuNum(const string& filename) {
     }
     // 数独有缺行
     if (lineno % (SIZE + 1) != 0) {
-        return sudokuIndex;
+        cerr << "文件中的数独并不完整，请检查，已退出程序。" << endl;
+        exit(1);
     }
     else {
         sudokuIndex = lineno / 10;
-        cout << "文件里一共有" << sudokuIndex << "个数独游戏待解决" << endl;
     }
+    cout << "文件里一共有" << sudokuIndex << "个数独游戏待解决" << endl;
     return sudokuIndex;
 }
 
  //从指定路径的文件中读取数独游戏
 vector<vector<int>> loadSudokuFromFile(const string& filename, int index)
 {
+    //vector<vector<int>> sudokuFromFile;
+    //ifstream InFile(filename);
+
+    //if (!InFile.is_open()) {
+    //    cerr << "Failed to open the file." << endl;
+    //    exit(1);
+    //}
+    //string line;
     ifstream InFile(filename);
     if (!InFile.is_open()) {
         cerr << "Failed to open file: " << filename << endl;
@@ -52,13 +61,19 @@ vector<vector<int>> loadSudokuFromFile(const string& filename, int index)
     // 从指定行开始读取数据，读取十行则代表一个数独
     while (getline(InFile, line) && (currentLine<startLine+SIZE)) {
         if (currentLine >= startLine) {
+            if (line.empty()) {
+                continue;
+            }
+
             istringstream iss(line);
             string token;
             while (iss >> token) {
-                if (token == "$")
+                if (token == "$") {
                     puzzle.push_back(-1);
-                else
+                }
+                else {
                     puzzle.push_back(stoi(token));
+                }
             }
         }
         currentLine++;
@@ -116,18 +131,23 @@ bool solveSudoku(vector<vector<int>>& board) {
                 for (int num = 1; num <= 9; num++) {
                     if (isSafe(board, row, col, num)) {
                         board[row][col] = num;
+
                         if (solveSudoku(board)) {
                             return true;
                         }
+
                         board[row][col] = -1;  // 回溯
                     }
                 }
+
                 return false;  // 所有数字都尝试过都无法解决，返回 false
             }
         }
     }
+
     return true;  // 数独已经解决
 }
+
 
  //解决共sudokuIndex个数独问题
 void solveSudokuGames(const string& filename, int sudokuIndex) {
@@ -141,6 +161,7 @@ void solveSudokuGames(const string& filename, int sudokuIndex) {
         }
         else {
             cout << "无解" << endl;
+            exit(1);
         }
     }
 }
