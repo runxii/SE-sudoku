@@ -1,84 +1,108 @@
-ï»¿#pragma warning(disable:4530)
+#pragma warning(disable:4530)
 #include <ctime>
 #include "solver.h"
 
 int main(int argc, char* argv[]) {
     if (argc < 3) {
-        cout << "ä½¿ç”¨æ–¹æ³•: ./sudoku.exe -c <number_of_games> -n <count> -r <min> <max> -n <count> -m <difficulty>" << endl;
-        return 0;
-    }
-
-    string option = argv[1];
-    string argument = argv[2];
-
-    if (option == "-c") {
-        generateMultipleBoard(stoi(argument));
-    }
-    else if (option == "-n") {
-
-        int sudokuCount = stoi(argument);
-        int eraseCount = ERASE;
-        if (argc < 4) {
-            //generateMultipleSudoku(sudokuCount, eraseCount);
-            cout << sudokuCount << "ä¸ªé»˜è®¤æ•°ç‹¬æ¸¸æˆå·²æˆåŠŸç”Ÿæˆï¼Œå¹¶ä¿å­˜generate.txtä¸­\nå¯¹åº”çš„ç»ˆå±€å·²ä¿å­˜åˆ°solveSheet.txtä¸­" << endl;
-        }
-        else {
-            string next_option = argv[3];
-            if (next_option == "-u") {
-                // éœ€è¦åŽ»é™¤çš„æ•°å­—æ•°é‡ï¼ŒèŒƒå›´åœ¨36åˆ°44ä¹‹é—´ï¼ˆä¿è¯æœ‰è§£ä¸”å”¯ä¸€è§£ï¼‰
-                eraseCount = 0;
-                eraseCount = rand() % 45 + 36;
-                cout << sudokuCount << "ä¸ªæœ‰å”¯ä¸€è§£çš„æ•°ç‹¬æ¸¸æˆå·²æˆåŠŸç”Ÿæˆï¼Œå¹¶ä¿å­˜generate.txtä¸­\nå¯¹åº”çš„ç»ˆå±€å·²ä¿å­˜åˆ°solveSheet.txtä¸­" << endl;
-            }
-            else {
-                string next_argument = argv[4];
-                if (next_option == "-r")
-                {
-                    // æŒ‰ç…§æŒ–ç©ºæ ¼å­çš„æ•°é‡èŒƒå›´ç”Ÿæˆæ•°ç‹¬æ¸¸æˆ
-                    int minErase = stoi(next_argument);
-                    int maxErase = stoi(argv[5]);
-                    eraseCount = rand() % (maxErase - minErase + 1) + minErase;
-                    cout << sudokuCount << "ä¸ªæŒ‡å®šæŒ–ç©ºçš„æ•°ç‹¬æ¸¸æˆå·²æˆåŠŸç”Ÿæˆï¼Œå¹¶ä¿å­˜generate.txtä¸­\nå¯¹åº”çš„ç»ˆå±€å·²ä¿å­˜åˆ°solveSheet.txtä¸­" << endl;
-                }
-                else if (next_option == "-m") {
-                    // æŒ‰ç…§éš¾åº¦çº§åˆ«ç”Ÿæˆæ•°ç‹¬æ¸¸æˆ
-                    int difficulty = stoi(next_argument);
-
-                    if (difficulty < 1 || difficulty > 3) {
-                        cout << "æ— æ•ˆçš„éš¾åº¦ç­‰çº§å‚æ•°ï¼š" << difficulty << endl;
-                        return 0;
-                    }
-
-                    switch (difficulty) {
-                    case 1:
-                        eraseCount = 30; // ç®€å•çº§åˆ«ï¼Œ30ä¸ªç©ºæ ¼
-                        break;
-                    case 2:
-                        eraseCount = 45; // ä¸­çº§åˆ«ï¼Œ45ä¸ªç©ºæ ¼
-                        break;
-                    case 3:
-                        eraseCount = 60; // é«˜çº§åˆ«ï¼Œ60ä¸ªç©ºæ ¼
-                        break;
-                    }
-                    //generateMultipleSudoku(sudokuCount, eraseCount);
-                    cout << sudokuCount << "ä¸ªéš¾åº¦ä¸º" << difficulty << "çš„æ•°ç‹¬æ¸¸æˆå·²æˆåŠŸç”Ÿæˆï¼Œå¹¶ä¿å­˜åˆ°generate.txt\nå¯¹åº”ç»ˆå±€ä¿å­˜åˆ°solveSheet.txtä¸­" << endl;
-                }
-                else {
-                    cerr << "æ— æ•ˆå‚æ•°ï¼š" << next_option << endl;
-                    return 0;
-                }
-            }
-        }
-        generateMultipleSudoku(sudokuCount, eraseCount);
-    }
-    else if (option == "-s") {
-        // èŽ·å–æ–‡ä»¶ä¸­æ•°ç‹¬æ¸¸æˆçš„ä¸ªæ•°
-        int sudokuNum = loadSudokuNum(argument);
-        solveSudokuGames(argument,sudokuNum);
-        cout << "è§£å†³å·²å®Œæˆï¼Œç­”æ¡ˆä¿å­˜åˆ°sudoku.txtä¸­ï¼Œè¯·æŸ¥çœ‹ã€‚" << endl;
+        cerr << "ERROR: ²ÎÊýÈ±Ê§" << endl;
+        cout << "USAGE: ./sudoku.exe -c <number_of_games> \n"
+            << "                    -s <path_to_file> \n"
+            << "                    -n <count>\n"
+            << "                    -n <count> -r <min> <max>\n"
+            << "                    -n <count> -u\n"
+            << "                    -n <count> -m <difficulty>" << endl;
     }
     else {
-        cerr << "æ— æ•ˆå‚æ•°: " << option << endl;
+        string option = argv[1];
+        string argument = argv[2];
+
+        if (option == "-c") {
+            if (stoi(argument) >= 1000000 || stoi(argument) <= 0)
+                cerr << "ERROR: -c <number_of_games> ²ÎÊý·¶Î§Îª0~1,000,000" << endl;
+            else
+                generateMultipleBoard(stoi(argument));
+        }
+        else if (option == "-n") {
+            // atoi²»±¨´í£¬¶øÊÇ·µ»Ø0
+            if (atoi(argument.c_str()) == 0)
+                cerr << "ERROR: -nÖ®ºóµÄ²ÎÊýÀàÐÍ´íÎó£¬ÇëÊäÈëÒ»¸öÔÚ0~10,000µÄÕûÊý" << endl;
+            else {
+                int sudokuCount = stoi(argument);
+                int eraseCount = ERASE;
+                if (argc == 3) {
+                    if (sudokuCount > 0 && sudokuCount < 10000)
+                        cout << sudokuCount << "¸öÄ¬ÈÏÊý¶ÀÓÎÏ·ÒÑ³É¹¦Éú³É£¬²¢±£´ægenerate.txtÖÐ\n¶ÔÓ¦µÄÖÕ¾ÖÒÑ±£´æµ½solveSheet.txtÖÐ" << endl;
+                    else
+                        cerr << "ERROR: -nÖ®ºóµÄ²ÎÊý·¶Î§´íÎó£¬ÇëÊäÈëÒ»¸öÔÚ0~10,000Ö®¼äµÄÕûÊý" << endl;
+                }
+                else {
+                    string next_option = argv[3];
+                    if (next_option == "-u") {
+                        if (argc > 4)
+                            cerr << "ERROR: -uµÄ²ÎÊý¹ý¶à" << endl;
+                        // ÐèÒªÈ¥³ýµÄÊý×ÖÊýÁ¿£¬·¶Î§ÔÚ36µ½44Ö®¼ä£¨±£Ö¤ÓÐ½âÇÒÎ¨Ò»½â£©
+                        eraseCount = 0;
+                        eraseCount = rand() % 45 + 36;
+                        cout << sudokuCount << "¸öÓÐÎ¨Ò»½âµÄÊý¶ÀÓÎÏ·ÒÑ³É¹¦Éú³É£¬²¢±£´ægenerate.txtÖÐ\n¶ÔÓ¦µÄÖÕ¾ÖÒÑ±£´æµ½solveSheet.txtÖÐ" << endl;
+                    }
+                    else {
+                        string next_argument = argv[4];
+                        if (next_option == "-r")
+                        {
+                            // °´ÕÕÍÚ¿Õ¸ñ×ÓµÄÊýÁ¿·¶Î§Éú³ÉÊý¶ÀÓÎÏ·
+                            if (atoi(next_argument.c_str()) * atoi(argv[5]) != 0) {
+                                int minErase = stoi(next_argument);
+                                int maxErase = stoi(argv[5]);
+                                if (minErase < maxErase && minErase >= 20 && maxErase <= 55) {
+                                    eraseCount = rand() % (maxErase - minErase + 1) + minErase;
+                                    cout << sudokuCount << "¸öÖ¸¶¨ÍÚ¿ÕµÄÊý¶ÀÓÎÏ·ÒÑ³É¹¦Éú³É£¬²¢±£´ægenerate.txtÖÐ\n¶ÔÓ¦µÄÖÕ¾ÖÒÑ±£´æµ½solveSheet.txtÖÐ" << endl;
+                                }
+                                else
+                                    cerr << "ERROR: -rµÄ²ÎÊý·¶Î§´íÎó£¬Çë´ÓÐ¡µ½´óÊäÈë20~55Ö®¼äµÄÁ½¸öÕûÊý" << endl;
+                            }
+                            else
+                                cerr << "ERROR: -rµÄ²ÎÊýÎÞÐ§" << endl;
+
+                        }
+                        else if (next_option == "-m") {
+                            // °´ÕÕÄÑ¶È¼¶±ðÉú³ÉÊý¶ÀÓÎÏ·
+                            int difficulty = stoi(next_argument);
+
+                            if (difficulty < 1 || difficulty > 3)
+                                cout << "ÎÞÐ§µÄÄÑ¶ÈµÈ¼¶²ÎÊý£º" << difficulty << endl;
+
+                            switch (difficulty) {
+                            case 1:
+                                eraseCount = 30; // ¼òµ¥¼¶±ð£¬30¸ö¿Õ¸ñ
+                                break;
+                            case 2:
+                                eraseCount = 45; // ÖÐ¼¶±ð£¬45¸ö¿Õ¸ñ
+                                break;
+                            case 3:
+                                eraseCount = 60; // ¸ß¼¶±ð£¬60¸ö¿Õ¸ñ
+                                break;
+                            }
+                            cout << sudokuCount << "¸öÄÑ¶ÈÎª" << difficulty << "µÄÊý¶ÀÓÎÏ·ÒÑ³É¹¦Éú³É£¬²¢±£´æµ½generate.txt\n¶ÔÓ¦ÖÕ¾Ö±£´æµ½solveSheet.txtÖÐ" << endl;
+                        }
+                        else
+                            cerr << "ÎÞÐ§²ÎÊý£º" << next_option << endl;
+                    }
+                }
+                generateMultipleSudoku(sudokuCount, eraseCount);
+            }
+        }
+        else if (option == "-s") {
+            // »ñÈ¡ÎÄ¼þÖÐÊý¶ÀÓÎÏ·µÄ¸öÊý
+            int sudokuNum = loadSudokuNum(argument);
+            if (sudokuNum == 0)
+                cerr << "ERROR: ÎÄ¼þÖÐµÄÊý¶À²¢²»ÍêÕû£¬Çë¼ì²é" << endl;
+            else {
+                solveSudokuGames(argument, sudokuNum);
+                cout << "½â¾öÒÑÍê³É£¬´ð°¸±£´æµ½sudoku.txtÖÐ£¬Çë²é¿´¡£" << endl;
+            }
+        }
+        else
+            cerr << "ERROR: ÎÞÐ§²ÎÊý " << option << endl;
     }
     return 0;
 }
