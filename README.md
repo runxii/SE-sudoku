@@ -96,6 +96,8 @@
 
 ## 四、质量测试
 
+![image-20230630111402365](./img/image-20230630111402365.png)
+
 ``` bash
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\ostream(284): warning C4530: 使用了 C++ 异常处理程序，但未启用展开语义。请指定 /EHsc
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\ostream(269): note: 在编译 类 模板 成员函数“std::basic_ostream<char,std::char_traits<char>> &std::basic_ostream<char,std::char_traits<char>>::operator <<(int)”时
@@ -109,3 +111,4 @@ A:\_Uni\junior\second term\software-engineering\SE-labs\SE-lab5-6.30\sudoku\sudo
 ![image-20230629202748351](./img/image-20230629202748351.png)
 
 ![image-20230630110942532](./img/image-20230630110942532.png)
+
