@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <iostream>
 #include <cstdlib>
 #include <string>
@@ -6,7 +6,6 @@
 #include <vector>
 #include <fstream>
 #include <algorithm>
-#include "testPuzzle.h"
 
 using namespace std;
 
@@ -116,7 +115,7 @@ bool generate_core(vector<vector<int>>& num, int row, int col)
             return true;
     }
     num[row][col] = -5;
-    return false;    
+    return false;
 }
 
 // 生成n个数独终局

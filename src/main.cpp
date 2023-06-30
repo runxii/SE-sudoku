@@ -1,3 +1,4 @@
+﻿#pragma warning(disable:4530)
 #include <ctime>
 #include "solver.h"
 
