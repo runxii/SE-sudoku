@@ -107,3 +107,5 @@ A:\_Uni\junior\second term\software-engineering\SE-labs\SE-lab5-6.30\sudoku\sudo
 ```
 
 ![image-20230629202748351](./img/image-20230629202748351.png)
+
+![image-20230630110942532](./img/image-20230630110942532.png)
