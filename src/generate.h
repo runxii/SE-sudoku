@@ -10,9 +10,9 @@
 
 using namespace std;
 
-// Êı¶ÀÆåÅÌ´óĞ¡Îª9*9
+// æ•°ç‹¬æ£‹ç›˜å¤§å°ä¸º9*9
 const int SIZE = 9;
-// Ã»ÓĞÆäËû²ÎÊıÊ±£¬Ä¬ÈÏ´ÓÒ»¸öÖÕ¾ÖÖĞÍÚ¿Õ40¸ö¸ñ×ÓµÃµ½Ò»¸ö¶ÀÁ¢µÄÊı¶ÀÓÎÏ·
+// æ²¡æœ‰å…¶ä»–å‚æ•°æ—¶ï¼Œé»˜è®¤ä»ä¸€ä¸ªç»ˆå±€ä¸­æŒ–ç©º40ä¸ªæ ¼å­å¾—åˆ°ä¸€ä¸ªç‹¬ç«‹çš„æ•°ç‹¬æ¸¸æˆ
 const int ERASE = 40;
 const string generateFilename = "generate.txt";
 const string solveSheetFilename = "solveSheet.txt";
@@ -24,7 +24,7 @@ void print(const vector<vector<int>>& num)
         for (int j = 0; j < SIZE; j++)
         {
             if (num[i][j] == -1) {
-                // ¿Õ¸ñÓ¦¸ÃÊä³ö$
+                // ç©ºæ ¼åº”è¯¥è¾“å‡º$
                 cout << "$ ";
             }
             else {
@@ -39,13 +39,13 @@ void print(const vector<vector<int>>& num)
 bool IsRightPlace(vector<vector<int>>& num, int row, int col)
 {
     int n = num[row][col];
-    //×¢Òâi < row
+    //æ³¨æ„i < row
     for (int i = 0; i < row; i++)
     {
         if (num[i][col] == n)
             return false;
     }
-    //×¢Òâi < col
+    //æ³¨æ„i < col
     for (int i = 0; i < col; i++)
     {
         if (num[row][i] == n)
@@ -58,7 +58,7 @@ bool IsRightPlace(vector<vector<int>>& num, int row, int col)
     col_start *= 3;
     int col_end = col_start + 2;
     int i = row_start, j = col_start;
-    //×¢Òâ k <= 8
+    //æ³¨æ„ k <= 8
     for (int k = 1; k <= 8; k++)
     {
         if (row != i || col != j)
@@ -70,7 +70,7 @@ bool IsRightPlace(vector<vector<int>>& num, int row, int col)
             break;
         if (j == col_end)
         {
-            //×¢Òâj = col_start £¡²»Òª¸ã´í»»ĞĞÊ±ÁĞµÄÆğÊ¼µã£¡
+            //æ³¨æ„j = col_start ï¼ä¸è¦æé”™æ¢è¡Œæ—¶åˆ—çš„èµ·å§‹ç‚¹ï¼
             j = col_start;
             i = i + 1;
         }
@@ -115,14 +115,12 @@ bool generate_core(vector<vector<int>>& num, int row, int col)
         if (next)
             return true;
     }
-    if (number.empty())
-    {
-        num[row][col] = -5;
-        return false;
-    }
+    num[row][col] = -5;
+    return false;
+    
 }
 
-// Éú³Én¸öÊı¶ÀÖÕ¾Ö
+// ç”Ÿæˆnä¸ªæ•°ç‹¬ç»ˆå±€
 void generateMultipleBoard(int n) {
     srand(static_cast<unsigned>(time(NULL)));
     for (int i = 0; i < n; i++) {
@@ -152,10 +150,10 @@ void eraseRandomGrids(vector<vector<int>>& num, int count) {
     }
 }
 
-// °ÑÉú³ÉµÄÊı¶ÀÓÎÏ·Ğ´ÈëÖ¸¶¨ÎÄ¼ş
-// sudokuIndex£ºÉú³ÉµÄµÚ¼¸¸öÓÎÏ·
+// æŠŠç”Ÿæˆçš„æ•°ç‹¬æ¸¸æˆå†™å…¥æŒ‡å®šæ–‡ä»¶
+// sudokuIndexï¼šç”Ÿæˆçš„ç¬¬å‡ ä¸ªæ¸¸æˆ
 void saveSudokuToFile(const vector<vector<int>>& num, const string& filename, int sudokuIndex) {
-    // ÒÔ×·¼ÓÄ£Ê½´ò¿ªÎÄ¼ş
+    // ä»¥è¿½åŠ æ¨¡å¼æ‰“å¼€æ–‡ä»¶
     ofstream outFile(filename, ios::app); 
 
     if (outFile.is_open()) {
@@ -172,15 +170,15 @@ void saveSudokuToFile(const vector<vector<int>>& num, const string& filename, in
             outFile << endl;
         }
 
-        outFile.close(); // ¹Ø±ÕÊä³öÎÄ¼ş
-        //cout << "µÚ" << sudokuIndex << "¸öÊı¶À³É¹¦±£´æµ½ÁËÒÔÏÂÎÄ¼şÖĞ£º" << filename << endl;
+        outFile.close(); // å…³é—­è¾“å‡ºæ–‡ä»¶
+        //cout << "ç¬¬" << sudokuIndex << "ä¸ªæ•°ç‹¬æˆåŠŸä¿å­˜åˆ°äº†ä»¥ä¸‹æ–‡ä»¶ä¸­ï¼š" << filename << endl;
     }
     else {
-        cerr << "ÎŞ·¨´ò¿ªÖ¸¶¨ÎÄ¼ş" << filename << endl;
+        cerr << "æ— æ³•æ‰“å¼€æŒ‡å®šæ–‡ä»¶" << filename << endl;
     }
 }
 
-// Éú³Én¸ö¶ÀÁ¢µÄÊı¶ÀÓÎÏ·
+// ç”Ÿæˆnä¸ªç‹¬ç«‹çš„æ•°ç‹¬æ¸¸æˆ
 void generateMultipleSudoku(int n, int eraseNum) {
     srand(static_cast<unsigned>(time(NULL)));
     for (int i = 0; i < n; i++) {
